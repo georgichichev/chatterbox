@@ -1,0 +1,9 @@
+.chat{
+    padding-left: 0;
+    margin: 0;
+    list-style-type: none;
+    overflow-y: scroll;
+    min-height: 85vh;
+    border-top: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+}
