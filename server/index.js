@@ -21,7 +21,9 @@ const io = new Server(server,{
 app.use(cors(corsOptions));
 
 io.on('connection', (socket) =>{
-    console.log('user connected ', socket.id)
+    socket.on('send message', message =>{
+        io.emit('send message', message);
+    })
 })
 
 server.listen(3000, () => {
