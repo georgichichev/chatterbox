@@ -3,7 +3,6 @@ import {Layout} from 'antd';
 import {useState} from "react";
 import {SideNavbar} from "./components/SideNavbar/SideNavbar.js";
 import {ChatBox} from "./components/ChatBox/ChatBox.js";
-import {MessageForm} from "./components/MessageForm/MessageForm.js";
 
 function App() {
     return (
@@ -14,7 +13,6 @@ function App() {
                     <div style={{margin: '24px 16px 0'}}>
                         <ChatBox/>
                     </div>
-                <MessageForm/>
                 </Layout>
             </Layout>
         </>
