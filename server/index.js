@@ -20,6 +20,10 @@ const io = new Server(server,{
 
 app.use(cors(corsOptions));
 
+io.on('connection', (socket) =>{
+    console.log('user connected ', socket.id)
+})
+
 server.listen(3000, () => {
     console.log('Server listening on port 3000...');
 });
