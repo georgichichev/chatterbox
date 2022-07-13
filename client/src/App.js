@@ -8,18 +8,10 @@ import {MessageForm} from "./components/MessageForm/MessageForm.js";
 function App() {
     return (
         <>
-            <Layout style={{
-                minHeight: '100vh',
-            }} hasSider>
+            <Layout style={{minHeight: '100vh'}} hasSider>
                 <SideNavbar/>
-                <Layout
-                    className="site-layout"
-                >
-                    <div
-                        style={{
-                            margin: '24px 16px 0',
-                        }}
-                    >
+                <Layout className="site-layout">
+                    <div style={{margin: '24px 16px 0'}}>
                         <ChatBox/>
                     </div>
                 <MessageForm/>
