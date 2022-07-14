@@ -5,6 +5,7 @@ const app = express();
 const http = require('http');
 const server = http.createServer(app);
 const cors = require('cors');
+const {auth} =require('./src/middlewares/auth.js');
 const routes = require('./src/routes.js');
 const {DB_URI, CORS_OPTIONS} = require("./src/constants.js");
 
@@ -19,6 +20,7 @@ const startServer = () => {
     }
 
     app.use(cors(CORS_OPTIONS));
+    app.use(auth);
     app.use(express.json());
     app.use(routes)
 
