@@ -1,6 +1,7 @@
-const playerService = require('../services/playerService.js');
+const roomService = require('../service/roomService.js');
 const {validateToken} = require('../services/userService.js');
 const {JWT_SECRET} = require("../constants.js");
+const roomService = require('../service/roomService.js');
 
 exports.auth = async (req, res, next) =>{
     const token = req.headers['x-authorization'];
@@ -28,3 +29,23 @@ exports.isAuth = (req, res, next) =>{
 
     next();
 };
+exports.preloadRoom = async(req, res, next) =>{
+    try{
+        const room = await roomService.getOneRoom(req.params.id);
+        req.room = room;
+    }
+    catch (err){
+        return res.status(404).json({message: 'Room not found.'});
+    }
+
+    next();
+}
+
+exports.isOwner = (req, res, next) =>{
+    if (req.user._id == req.room.creator){
+        next();
+    }
+    else{
+        res.status(403).json({message: 'You have no permission to do this.'});
+    }
+}
