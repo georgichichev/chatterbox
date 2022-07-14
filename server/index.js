@@ -5,6 +5,7 @@ const app = express();
 const http = require('http');
 const server = http.createServer(app);
 const cors = require('cors');
+const routes = require('./src/routes.js');
 const {DB_URI, CORS_OPTIONS} = require("./src/constants.js");
 
 const startServer = () => {
@@ -18,6 +19,8 @@ const startServer = () => {
     }
 
     app.use(cors(CORS_OPTIONS));
+    app.use(express.json());
+    app.use(routes)
 
     const io = new Server(server, {
         cors: {
