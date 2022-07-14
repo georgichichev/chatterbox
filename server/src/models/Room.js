@@ -9,6 +9,14 @@ const roomSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    imageUrl:{
+        type: String,
+        required: true
+    },
+    creator:{
+        type: mongoose.Types.ObjectId,
+        ref: 'User'
+    },
     users:[
         {
             type: mongoose.Types.ObjectId,
