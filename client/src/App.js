@@ -5,6 +5,7 @@ import {SideNavbar} from "./components/SideNavbar/SideNavbar.js";
 import {ChatBox} from "./components/ChatBox/ChatBox.js";
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Rooms from "./components/Rooms/Rooms.js";
+import Register from "./components/Register/Register.js";
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
                 <Routes>
                     <Route path='/chat' element={<ChatBox/>}/>
                     <Route path='/rooms' element={<Rooms/>}/>
+                    <Route path='/register' element={<Register/>}/>
                 </Routes>
             </Layout>
         </Layout>
