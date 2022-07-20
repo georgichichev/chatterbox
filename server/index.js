@@ -31,24 +31,34 @@ const startServer = () => {
         }
     });
 
+    io.use((socket, next) => {
+        socket.credential = socket.handshake.auth.credential;
+        next();
+    })
 
     io.on('connection', (socket) => {
         socket.on('disconnect', () =>{
-            socket.broadcast.emit('user disconnect', socket.id)
-        })
+            socket.broadcast.emit('user disconnect', socket.credential)
+        });
+
+        socket.join(socket.credential);
 
         const users = [];
-        for (let [id] of io.of("/").sockets) {
-            if (id !== socket.id){
-                users.push(id);
+        for (let user of io.of("/").sockets) {
+            if (user[1].credential !== socket.credential){
+                users.push(user[1].credential);
             }
         }
         socket.emit('users', users);
 
-        socket.broadcast.emit("user connected", socket.id);
+        socket.broadcast.emit("user connected", socket.credential);
 
         socket.on('send message', message => {
             io.emit('send message', message);
+        })
+
+        socket.on('private message', (message) =>{
+            io.to(message.to).emit('private message', message.message)
         })
     })
 

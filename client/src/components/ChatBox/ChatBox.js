@@ -5,29 +5,49 @@ import {MessageForm} from "../MessageForm/MessageForm.js";
 import {ChatLine} from "./ChatLine.js";
 import {SocketContext} from "../../context.js";
 
-
-export const ChatBox = () => {
+export const ChatBox = ({currentRoom}) => {
     const socket = useContext(SocketContext);
 
     useEffect(() =>{
-        socket.on('send message', (message) =>{
+        const user = JSON.parse(sessionStorage.getItem('user'));
+
+        socket.auth = {credential: user.email};
+        socket.connect();
+    }, [socket]);
+
+    useEffect(() => {
+        socket.on('send message', (message) => {
             setChat((current) => [...current, message]);
         });
 
-        return () =>{
+        socket.on('private message', (message) =>{
+            setChat((current) => [...current, message]);
+        });
+
+        return () => {
             socket.off('send message')
+            socket.off('private message')
         }
-    }, [])
+    }, []);
+
 
     const [message, setMessage] = useState({name: '', content: ''});
     const [chat, setChat] = useState([]);
 
-    const onFormSubmit = (message) =>{
-        socket.emit('send message', message);
-        setMessage({name: 'Georgi', content: ''})
+
+    const onFormSubmit = (message) => {
+        if(currentRoom !== ''){
+            socket.emit('private message', {message, to: currentRoom});
+            setChat((current) => [...current, message]);
+
+        }
+        else{
+            socket.emit('send message', message);
+            setMessage({name: 'Georgi', content: ''})
+        }
     }
 
-    const onInputChange = (e)=>{
+    const onInputChange = (e) => {
         setMessage({name: 'Georgi', content: e.target.value})
     }
 
