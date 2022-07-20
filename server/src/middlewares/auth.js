@@ -1,7 +1,6 @@
 const roomService = require('../service/roomService.js');
-const {validateToken} = require('../services/userService.js');
+const {validateToken} = require('../service/userService.js');
 const {JWT_SECRET} = require("../constants.js");
-const roomService = require('../service/roomService.js');
 
 exports.auth = async (req, res, next) =>{
     const token = req.headers['x-authorization'];
