@@ -33,6 +33,10 @@ const startServer = () => {
 
 
     io.on('connection', (socket) => {
+        socket.on('disconnect', () =>{
+            socket.broadcast.emit('user disconnect', socket.id)
+        })
+
         const users = [];
         for (let [id] of io.of("/").sockets) {
             if (id !== socket.id){

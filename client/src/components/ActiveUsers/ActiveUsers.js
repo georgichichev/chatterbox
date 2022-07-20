@@ -14,9 +14,14 @@ const ActiveUsers = () => {
         socket.on("user connected", id => {
             setUsers((current) => [...current, id])
         })
+
+        socket.on("user disconnect", id => {
+            setUsers((current) => current.filter(x => x !== id));
+        })
         return () =>{
             socket.off('send message');
             socket.off('user connected');
+            socket.off('user disconnect');
         }
     }, [])
 
