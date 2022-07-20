@@ -8,6 +8,13 @@
     list-style-type: none;
     margin: 0;
     padding: 0;
+}
+
+.heading{
+    text-align: center;
+}
+.container{
+    display: flex;
+    flex-direction: column;
     min-width: 250px;
-    max-width: 300px;
 }

@@ -7,8 +7,8 @@ const ActiveUsers = ({onUserClick}) => {
 
     const [users, setUsers] = useState([]);
 
-    useEffect(() =>{
-        socket.on('users', (users) =>{
+    useEffect(() => {
+        socket.on('users', (users) => {
             setUsers(users)
         });
 
@@ -19,17 +19,20 @@ const ActiveUsers = ({onUserClick}) => {
         socket.on("user disconnect", id => {
             setUsers((current) => current.filter(x => x !== id));
         })
-        return () =>{
+        return () => {
             socket.off('send message');
             socket.off('user connected');
             socket.off('user disconnect');
         }
     }, [socket])
 
-    return(
-        <ul className='activeUsers'>
-            {users.map(x => <li onClick={(e) => onUserClick(e)} className='user' key={users.indexOf(x)}>{x}</li>)}
-        </ul>
+    return (
+        <div className='container'>
+            <h1 className='heading'>Users Online</h1>
+            <ul className='activeUsers'>
+                {users.map(x => <li onClick={(e) => onUserClick(e)} className='user' key={users.indexOf(x)}>{x}</li>)}
+            </ul>
+        </div>
     )
 }
 
