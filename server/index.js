@@ -33,6 +33,16 @@ const startServer = () => {
 
 
     io.on('connection', (socket) => {
+        const users = [];
+        for (let [id] of io.of("/").sockets) {
+            if (id !== socket.id){
+                users.push(id);
+            }
+        }
+        socket.emit('users', users);
+
+        socket.broadcast.emit("user connected", socket.id);
+
         socket.on('send message', message => {
             io.emit('send message', message);
         })
