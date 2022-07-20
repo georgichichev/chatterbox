@@ -1,7 +1,8 @@
 import {useContext, useEffect, useState} from "react";
 import {SocketContext} from "../../context.js";
+import './ActiveUsers.css';
 
-const ActiveUsers = () => {
+const ActiveUsers = ({onUserClick}) => {
     const socket = useContext(SocketContext);
 
     const [users, setUsers] = useState([]);
@@ -23,11 +24,11 @@ const ActiveUsers = () => {
             socket.off('user connected');
             socket.off('user disconnect');
         }
-    }, [])
+    }, [socket])
 
     return(
-        <ul>
-            {users.map(x => <li key={users.indexOf(x)}>{x}</li>)}
+        <ul className='activeUsers'>
+            {users.map(x => <li onClick={(e) => onUserClick(e)} className='user' key={users.indexOf(x)}>{x}</li>)}
         </ul>
     )
 }

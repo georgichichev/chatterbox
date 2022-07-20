@@ -1,0 +1,13 @@
+.user{
+    font-size: medium;
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+}
+.activeUsers{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    min-width: 250px;
+    max-width: 300px;
+}
