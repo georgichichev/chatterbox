@@ -6,6 +6,7 @@ import {ChatBox} from "./components/ChatBox/ChatBox.js";
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Rooms from "./components/Rooms/Rooms.js";
 import Register from "./components/Register/Register.js";
+import Login from "./components/Login/Login.js";
 
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
                     <Route path='/chat' element={<ChatBox/>}/>
                     <Route path='/rooms' element={<Rooms/>}/>
                     <Route path='/register' element={<Register/>}/>
+                    <Route path='/login' element={<Login/>}/>
                 </Routes>
             </Layout>
         </Layout>
