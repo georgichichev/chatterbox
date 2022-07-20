@@ -1,16 +1,18 @@
 import './ChatBox.css'
 import {io} from "socket.io-client";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {MessageForm} from "../MessageForm/MessageForm.js";
 import {ChatLine} from "./ChatLine.js";
+import {SocketContext} from "../../context.js";
 
-const socket = io.connect('http://localhost:3000');
 
 export const ChatBox = () => {
+    const socket = useContext(SocketContext);
+
     useEffect(() =>{
         socket.on('send message', (message) =>{
             setChat((current) => [...current, message]);
-        })
+        });
 
         return () =>{
             socket.off('send message')
