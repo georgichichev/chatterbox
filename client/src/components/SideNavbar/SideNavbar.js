@@ -1,45 +1,41 @@
 import {Menu} from "antd";
 import Sider from "antd/es/layout/Sider.js";
 import {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+
+const items = [
+    {label: 'Rooms', key: '/rooms'},
+    {label: 'Create room', key: '/rooms/create'},
+    {label: 'Chat', key: '/chat'},
+    {label: 'Login', key: '/login'},
+    {label: 'Register', key: '/register'},
+];
+
 
 export const SideNavbar = () => {
+    const navigate = useNavigate();
+
     const [collapsed, setCollapsed] = useState(true);
+    const [selected, setSelected] = useState('');
+
+    useEffect(() =>{
+        setSelected(window.location.pathname)
+    },[window.location.pathname])
+
+    const onClick = (e) => {
+        navigate(e.key)
+    }
 
     return (
-        <Sider breakpoint={"lg"} onBreakpoint={() => setCollapsed(true)} collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-            <Menu style={{fontSize: '17px'}}
-                  theme="dark"
-                  defaultSelectedKeys={['1']}
-                  mode="inline"
-            >
-                <Menu.Item key="Rooms">
-                    <Link to='/rooms'>
-                        Rooms
-                    </Link>
-                </Menu.Item>
-                <Menu.Item key="Create Room">
-                    <Link to='/rooms/create'>
-                        Create Room
-                    </Link>
-                </Menu.Item>
-                <Menu.Item key="Chat" disabled={true}>
-                    <Link to='/chat'>
-                        Chat
-                    </Link>
-                </Menu.Item>
-                <Menu.Item key="Login">
-                    <Link to='/login'>
-                        Login
-                    </Link>
-                </Menu.Item>
-                <Menu.Item key="Register">
-                    <Link to='/register'>
-                        Register
-                    </Link>
-                </Menu.Item>
-
-            </Menu>
+        <Sider breakpoint={"lg"} onBreakpoint={() => setCollapsed(true)} collapsible collapsed={collapsed}
+               onCollapse={(value) => setCollapsed(value)}>
+            <Menu
+                onClick={onClick}
+                selectedKeys={[selected]}
+                mode="inline"
+                theme="dark"
+                items={items}
+            />
         </Sider>
     )
 }
