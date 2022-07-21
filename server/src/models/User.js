@@ -17,6 +17,16 @@ const userSchema = new mongoose.Schema({
         maxLength: [20, 'Username cannot be more than 20 characters long.'],
         required: true
     },
+    avatar:{
+        type: String,
+        required: true
+    },
+    rooms:[
+        {
+            type: mongoose.Types.ObjectId,
+            ref: 'Room'
+        }
+    ],
     password:{
         type: String,
         required: true
