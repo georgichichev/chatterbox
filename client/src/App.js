@@ -10,6 +10,7 @@ import ActiveUsers from "./components/ActiveUsers/ActiveUsers.js";
 import {SocketContext, socket} from "./context.js";
 import Home from "./components/Home/Home.js";
 import {useContext, useState} from "react";
+import CreateRoom from "./components/Rooms/CreateRoom/CreateRoom.js";
 
 function App() {
     const socket = useContext(SocketContext);
@@ -30,6 +31,7 @@ function App() {
                         <Route path='/rooms' element={<Rooms/>}/>
                         <Route path='/register' element={<Register/>}/>
                         <Route path='/login' element={<Login/>}/>
+                        <Route path='/rooms/create' element={<CreateRoom/>}/>
                     </Routes>
                 </Layout>
                 <ActiveUsers onUserClick={onUserClick}/>

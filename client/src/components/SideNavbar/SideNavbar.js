@@ -1,7 +1,6 @@
 import {Menu} from "antd";
 import Sider from "antd/es/layout/Sider.js";
-import {useState} from "react";
-import {UsergroupAddOutlined} from "@ant-design/icons";
+import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 
 export const SideNavbar = () => {
@@ -15,11 +14,16 @@ export const SideNavbar = () => {
                   mode="inline"
             >
                 <Menu.Item key="Rooms">
-                    <Link to='rooms'>
+                    <Link to='/rooms'>
                         Rooms
                     </Link>
                 </Menu.Item>
-                <Menu.Item key="Chat">
+                <Menu.Item key="Create Room">
+                    <Link to='/rooms/create'>
+                        Create Room
+                    </Link>
+                </Menu.Item>
+                <Menu.Item key="Chat" disabled={true}>
                     <Link to='/chat'>
                         Chat
                     </Link>
