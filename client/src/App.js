@@ -8,7 +8,6 @@ import Register from "./components/Register/Register.js";
 import Login from "./components/Login/Login.js";
 import ActiveUsers from "./components/ActiveUsers/ActiveUsers.js";
 import {SocketContext, socket} from "./context.js";
-import Home from "./components/Home/Home.js";
 import {useContext, useState} from "react";
 import CreateRoom from "./components/Rooms/CreateRoom/CreateRoom.js";
 
@@ -26,7 +25,7 @@ function App() {
                 <SideNavbar/>
                 <Layout className="site-layout">
                     <Routes>
-                        <Route path='/' element={<Home/>}/>
+                        <Route path='/' element={<Login/>}/>
                         <Route path='/chat' element={<ChatBox currentRoom={currentRoom}/>}/>
                         <Route path='/rooms' element={<Rooms/>}/>
                         <Route path='/register' element={<Register/>}/>
