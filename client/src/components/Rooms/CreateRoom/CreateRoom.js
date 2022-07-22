@@ -19,7 +19,8 @@ export const CreateRoom = () => {
         const data = {capacity, name, imageUrl: prefix + photo};
 
         createRoom(data)
-            .then(() => navigate('/rooms'));
+            .then(() => navigate('/rooms'))
+            .catch((err) => console.log(err));
     };
 
     const onFinishFailed = (errorInfo) => {

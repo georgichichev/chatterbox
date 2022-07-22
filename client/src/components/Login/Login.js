@@ -12,7 +12,8 @@ export const Login = () => {
             .then((user) => {
                 sessionStorage.setItem('user', JSON.stringify(user));
                 navigate('/chat');
-            });
+            })
+            .catch(err => console.log(err));
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -32,6 +33,7 @@ export const Login = () => {
                 initialValues={{
                     remember: true,
                 }}
+                size="large"
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"

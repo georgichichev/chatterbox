@@ -31,6 +31,7 @@ export const Register = () => {
                 initialValues={{
                     remember: true,
                 }}
+                size="large"
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
