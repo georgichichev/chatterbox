@@ -7,7 +7,13 @@ export const register = (data) => {
             'content-type': 'application/json'
         },
         body: JSON.stringify(data)
-    }).then(res => res.json())
+    })
+        .then(res => {
+        if (res.ok !== true){
+            throw new Error('Email is already taken.')
+        }
+        return res.json();
+    })
 }
 
 export const login = (data) => {
@@ -19,8 +25,8 @@ export const login = (data) => {
         body: JSON.stringify(data)
     })
         .then(res => {
-            if(!res.ok){
-                throw new Error('Provide token.')
+            if (res.ok !== true){
+                throw new Error('Invalid email or password.')
             }
             return res.json();
         })

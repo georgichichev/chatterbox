@@ -13,7 +13,7 @@ export const Login = () => {
                 sessionStorage.setItem('user', JSON.stringify(user));
                 navigate('/chat');
             })
-            .catch(err => console.log(err));
+            .catch(err => console.log(err.message));
     };
 
     const onFinishFailed = (errorInfo) => {
