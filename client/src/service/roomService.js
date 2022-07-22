@@ -22,3 +22,15 @@ export const getAllRooms = () => {
     return fetch(url)
         .then(res => res.json())
 }
+
+export const editRoom = (data, id) =>{
+    return fetch(url + '/edit/' + id,{
+        method: 'PUT',
+        headers:{
+            'content-type': 'application/json',
+            'X-Authorization': getToken()
+        },
+        body: JSON.stringify(data)
+    })
+        .then(res => res.json())
+}

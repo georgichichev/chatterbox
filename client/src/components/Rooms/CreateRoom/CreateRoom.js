@@ -2,21 +2,14 @@ import {Button, Form, Input, InputNumber, Select} from 'antd';
 import {useNavigate} from "react-router-dom";
 import {createRoom} from "../../../service/roomService.js";
 
-const urlTypes = [
-    {value: "https", label: "https://"},
-    {value: "http", label: "http://"},
-];
-
-const UrlTypeSelect = <Select options={urlTypes}/>;
-
 export const CreateRoom = () => {
     const navigate = useNavigate();
 
 
     const onFinish = (values) => {
-        const {capacity, name, photo, prefix} = values;
+        const {capacity, name, photo} = values;
 
-        const data = {capacity, name, imageUrl: prefix + photo};
+        const data = {capacity, name, imageUrl: photo};
 
         createRoom(data)
             .then(() => navigate('/rooms'))
@@ -79,15 +72,6 @@ export const CreateRoom = () => {
                 >
                     <Input
                         placeholder="Photo url"
-                        addonBefore={
-                            <Form.Item
-                                name='prefix'
-                                noStyle
-                                initialValue="https://"
-                            >
-                                {UrlTypeSelect}
-                            </Form.Item>
-                        }
                     />
                 </Form.Item>
 

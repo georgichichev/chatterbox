@@ -8,13 +8,17 @@ const Rooms = () => {
     useEffect(() =>{
         getAllRooms()
             .then(result => setRooms(result));
-    }, [])
+    }, []);
+
+    const onEdit = (room) =>{
+        setRooms((current) => current.map(x => x._id === room._id ? room : x))
+    };
 
     return (
         <>
             <h1>Rooms</h1>
             <div>
-                {rooms.map(x => <RoomCard key={x._id} room={x}/>)}
+                {rooms.map(x => <RoomCard key={x._id} onEdit={onEdit} room={x}/>)}
             </div>
         </>
     )
