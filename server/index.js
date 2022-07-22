@@ -34,7 +34,7 @@ const startServer = () => {
     io.use((socket, next) => {
         socket.credential = socket.handshake.auth.credential;
         next();
-    })
+    });
 
     io.on('connection', (socket) => {
         socket.on('disconnect', () =>{

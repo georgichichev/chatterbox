@@ -32,7 +32,20 @@ router.post('/create',isAuth, async (req, res) => {
         console.log(err)
         const message = errorMapper(err);
 
-        res.status(400).json(message);
+        res.status(400).json({message});
+    }
+});
+
+router.put('/edit/:id', isAuth, preloadRoom, isOwner, async (req, res) => {
+    try {
+        const room = await roomService.editRoom(req.params.id, {...req.body, creator: req.user._id});
+
+        console.log(room)
+
+        res.json(room);
+    } catch (err) {
+        const message = errorMapper(err);
+        res.status(400).json({message});
     }
 });
 
