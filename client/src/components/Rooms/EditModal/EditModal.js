@@ -1,17 +1,19 @@
-import {Button, Form, Input, InputNumber, Modal} from 'antd';
-import useForm from "antd/es/form/hooks/useForm.js";
+import {Form, Input, InputNumber, Modal} from 'antd';
 import {editRoom} from "../../../service/roomService.js";
-import {useNavigate} from "react-router-dom";
+import {useContext} from "react";
+import {RoomsContext} from "../../../contexts/roomsContext.js";
 
-const EditModal = ({isModalVisible, handleCancel, room, onEdit}) => {
-    const navigate = useNavigate();
-    const [form] = useForm();
+const EditModal = ({isModalVisible, handleCancel, room}) => {
+    const {setRooms} = useContext(RoomsContext);
+
+    const onEdit = (room) =>{
+        setRooms((current) => current.map(x => x._id === room._id ? room : x))
+    };
 
     const onFinish = (values) => {
         editRoom(values, room._id)
             .then(result => {
                 onEdit(result);
-                form.resetFields();
                 handleCancel();
             })
     };
@@ -24,7 +26,6 @@ const EditModal = ({isModalVisible, handleCancel, room, onEdit}) => {
         <>
             <Modal okText='Edit' okButtonProps={{htmlType: 'submit', form: 'edit-form'}} centered={true} title="Edit Room" visible={isModalVisible} onCancel={handleCancel}>
                     <Form
-                        form={form}
                         id="edit-form"
                         name="basic"
                         labelCol={{
@@ -32,9 +33,6 @@ const EditModal = ({isModalVisible, handleCancel, room, onEdit}) => {
                         }}
                         wrapperCol={{
                             span: 16,
-                        }}
-                        initialValues={{
-                            remember: true,
                         }}
                         size="large"
                         onFinish={onFinish}
