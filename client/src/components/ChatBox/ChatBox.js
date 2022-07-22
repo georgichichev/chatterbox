@@ -3,7 +3,7 @@ import {io} from "socket.io-client";
 import {useContext, useEffect, useState} from "react";
 import {MessageForm} from "../MessageForm/MessageForm.js";
 import {ChatLine} from "./ChatLine.js";
-import {SocketContext} from "../../context.js";
+import {SocketContext} from "../../contexts/socketContext.js";
 
 export const ChatBox = ({currentRoom}) => {
     const socket = useContext(SocketContext);

@@ -5,15 +5,11 @@ import EditModal from "../EditModal/EditModal.js";
 
 const {Meta} = Card;
 
-export const RoomCard = ({room, onEdit}) => {
+export const RoomCard = ({room}) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     const showModal = () => {
         setIsModalVisible(true);
-    };
-
-    const handleEdit = () => {
-        setIsModalVisible(false);
     };
 
     const handleCancel = () => {
@@ -22,7 +18,7 @@ export const RoomCard = ({room, onEdit}) => {
 
     return (
         <>
-            <EditModal room={room} onEdit={onEdit} isModalVisible={isModalVisible} handleCancel={handleCancel} handleEdit={handleEdit}/>
+            <EditModal room={room} isModalVisible={isModalVisible} handleCancel={handleCancel}/>
             <Card
                 hoverable={true}
                 style={{

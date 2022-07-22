@@ -1,5 +1,5 @@
 import {useContext, useEffect, useState} from "react";
-import {SocketContext} from "../../context.js";
+import {SocketContext} from "../../contexts/socketContext.js";
 import './ActiveUsers.css';
 
 const ActiveUsers = ({onUserClick}) => {
